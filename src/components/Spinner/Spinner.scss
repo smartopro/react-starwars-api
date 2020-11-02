@@ -1,0 +1,92 @@
+@keyframes ldio-rf4w7ddopc {
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
+}
+.ldio-rf4w7ddopc div { box-sizing: border-box!important }
+.ldio-rf4w7ddopc > div {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  top: 14px;
+  left: 14px;
+  border-radius: 50%;
+  border: 4px solid #000;
+  border-color: #e15b64 transparent #e15b64 transparent;
+  animation: ldio-rf4w7ddopc 1.36986301369863s linear infinite;
+}
+
+.ldio-rf4w7ddopc > div:nth-child(2), .ldio-rf4w7ddopc > div:nth-child(4) {
+  width: 62px;
+  height: 62px;
+  top: 19px;
+  left: 19px;
+  animation: ldio-rf4w7ddopc 1.36986301369863s linear infinite reverse;
+}
+.ldio-rf4w7ddopc > div:nth-child(2) {
+  border-color: transparent #f8b26a transparent #f8b26a
+}
+.ldio-rf4w7ddopc > div:nth-child(3) { border-color: transparent }
+.ldio-rf4w7ddopc > div:nth-child(3) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.ldio-rf4w7ddopc > div:nth-child(3) div:before, .ldio-rf4w7ddopc > div:nth-child(3) div:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  top: -4px;
+  left: 30px;
+  background: #e15b64;
+  border-radius: 50%;
+  box-shadow: 0 68px 0 0 #e15b64;
+}
+.ldio-rf4w7ddopc > div:nth-child(3) div:after {
+  left: -4px;
+  top: 30px;
+  box-shadow: 68px 0 0 0 #e15b64;
+}
+
+.ldio-rf4w7ddopc > div:nth-child(4) { border-color: transparent; }
+.ldio-rf4w7ddopc > div:nth-child(4) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.ldio-rf4w7ddopc > div:nth-child(4) div:before, .ldio-rf4w7ddopc > div:nth-child(4) div:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  top: -4px;
+  left: 25px;
+  background: #f8b26a;
+  border-radius: 50%;
+  box-shadow: 0 58px 0 0 #f8b26a;
+}
+.ldio-rf4w7ddopc > div:nth-child(4) div:after {
+  left: -4px;
+  top: 25px;
+  box-shadow: 58px 0 0 0 #f8b26a;
+}
+.loadingio-spinner-double-ring-wi6x0j0fqn7 {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+.ldio-rf4w7ddopc {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.8);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-rf4w7ddopc div { box-sizing: content-box; }

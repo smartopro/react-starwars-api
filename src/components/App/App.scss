@@ -1,0 +1,16 @@
+.App {
+  &__panel {
+    margin-right: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__list {
+    text-align: center;
+  }
+
+  &__details {
+    padding-right: 0;
+    text-align: center;
+  }
+}

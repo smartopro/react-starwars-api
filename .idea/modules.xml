@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/star-db.iml" filepath="$PROJECT_DIR$/star-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/star-db.iml" filepath="$PROJECT_DIR$/.idea/star-db.iml" />
     </modules>
   </component>
 </project>
