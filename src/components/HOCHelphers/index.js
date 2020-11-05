@@ -1,7 +1,11 @@
-import withDataHOC from "./withDataHOC";
+import withData from "./withData";
 import withSwapiService from "./withSwapiService"
+import withChildFunction from "./withChildFunction";
+import compose from "./Compose";
 
 export {
-    withDataHOC,
-    withSwapiService
+    withData,
+    withSwapiService,
+    withChildFunction,
+    compose
 };

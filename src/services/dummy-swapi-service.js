@@ -13,8 +13,8 @@ export default class DummySwapiService {
       id: 2,
       name: 'Frodo Baggins [TEST DATA]',
       gender: 'male',
-      birthYear: 'long ago',
-      eyeColor: 'dark brown'
+      birthYear: 'not so long ago',
+      eyeColor: 'dark green'
     }
   ];
 
@@ -53,8 +53,8 @@ export default class DummySwapiService {
     return this._people;
   };
 
-  getPerson = async () => {
-    return this._people[0];
+  getPerson = async id => {
+    return this._people.find(item => item.id.toString() === id.toString());
   };
 
   getAllPlanets = async () => {
@@ -62,7 +62,7 @@ export default class DummySwapiService {
   };
 
   getPlanet = async id => {
-    return this._planets.find(item => item.id === id)
+    return this._planets.find(item => item.id.toString() === id.toString())
   };
 
   getAllStarships = async () => {
@@ -73,15 +73,11 @@ export default class DummySwapiService {
     return this._starships[0];
   };
 
-  getPersonImage = () => {
-    return `https://placeimg.com/400/500/people`
-  };
+  getMaxPeopleId = async () => {
+    return Math.max(...this._people.map(item => Number.parseInt(item.id)));
+  }
 
-  getStarshipImage = () => {
-    return `https://placeimg.com/600/400/tech`;
-  };
-
-  getPlanetImage = () => {
-    return `https://placeimg.com/400/400/nature`
-  };
+  getPersonImage = ({id}) => `https://placeimg.com/400/500/people/${id}`;
+  getStarshipImage = ({id}) => `https://placeimg.com/600/400/tech/${id}`;
+  getPlanetImage = ({id}) => `https://placeimg.com/400/400/nature/${id}`;
 }

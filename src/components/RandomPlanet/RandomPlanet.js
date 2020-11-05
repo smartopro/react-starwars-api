@@ -1,14 +1,24 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "./RandomPlanet.scss";
 import Spinner from "../Spinner";
 import ErrorIndicator from "../ErrorIndicator";
 import {
     SwapiServiceContext
 } from "../SwapiServiceContext";
+import {withSwapiService} from "../HOCHelphers";
 
-export default class RandomPlanet extends React.Component {
+class RandomPlanet extends React.Component {
+    static defaultProps = {
+        updateInterval: 10 * 1000
+    }
+
+    static propTypes = {
+        updateInterval: PropTypes.number.isRequired
+    }
+
     static contextType = SwapiServiceContext;
-    // swapiService = new SwapiService();
 
     state = {
         planet: {
@@ -17,12 +27,17 @@ export default class RandomPlanet extends React.Component {
     }
 
     componentDidMount() {
+        const {updateInterval} = this.props;
         this.update();
-        this.interval = setInterval(this.update, 50000000);
+        this.interval = setInterval(this.update, updateInterval);
     }
 
     componentWillUnmount() {
         if (this.interval) clearInterval(this.interval);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.getPlanet !== prevProps.getPlanet) this.update();
     }
 
     onPlanetLoaded = planet => {
@@ -45,10 +60,15 @@ export default class RandomPlanet extends React.Component {
 
     update = () =>  {
         this.setState({ planet: { loading: true } });
-        // const id = Math.floor(Math.random()*18) + 2;
-        const id = Math.floor(Math.random()*2)+1;
-        this.context
-            .getPlanet(id)
+        let id, image;
+        this.props
+            .getMaxPeopleId()
+            .then(maxPeopleId => {
+                id = Math.floor(Math.random()*maxPeopleId)+1;
+                image = this.props.getPlanetImage({id});
+            })
+            .then(() => this.props.getPlanet(id))
+            .then(planet => ({ ...planet, image }))
             .then(this.onPlanetLoaded)
             .catch(this.onError);
     }
@@ -67,13 +87,21 @@ export default class RandomPlanet extends React.Component {
     }
 }
 
+export default withSwapiService(swapiService => {
+    return {
+        getMaxPeopleId: swapiService.getMaxPeopleId,
+        getPlanet: swapiService.getPlanet,
+        getPlanetImage: swapiService.getPlanetImage
+    }
+})(RandomPlanet)
+
 const PlanetView = ({planet}) => {
-    const { id, name, population, period, diameter } = planet;
+    const { id, name, population, period, diameter, image } = planet;
 
     return (
         <React.Fragment>
             <img className="planet-image"
-                 src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={`id: ${id}`} />
+                 src={image} alt={`id: ${id}`} />
             <div>
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">

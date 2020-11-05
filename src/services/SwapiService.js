@@ -82,6 +82,11 @@ export default class SwapiService {
         }
     }
 
+    getMaxPeopleId = async () => {
+        const people = await this.getAllPeople();
+        return Math.max(...people.map(item => item.id));
+    }
+
     getPersonImage = ({id}) => `${this.#imageUrl}/characters/${id}.jpg`;
     getStarshipImage = ({id}) => `${this.#imageUrl}/starships/${id}.jpg`;
     getPlanetImage = ({id}) => `${this.#imageUrl}/planets/${id}.jpg`;

@@ -8,27 +8,26 @@ import ErrorIndicator from "../ErrorIndicator";
 import SwapiService from "../../services/SwapiService";
 import DummySwapiService from "../../services/dummy-swapi-service"
 import ErrorBoundry from "../ErrorBoundry";
-import {
-    PersonDetails,
-    PersonList,
-    PlanetDetails,
-    PlanetList,
-    StarshipDetails,
-    StarshipList
-} from "../SWComponents";
 import { SwapiServiceProvider } from "../SwapiServiceContext";
+import { PeoplePage, PlanetPage, StarshipPage } from "../Pages";
 
 export default class App extends React.Component {
     state = {
-        hasError: false
+        hasError: false,
+        swapiService: new DummySwapiService()
     }
-
-    swapiService = new DummySwapiService();
 
     componentDidCatch(error, errorInfo) {
         console.log(error);
         console.log(errorInfo);
         this.setState({ hasError: true });
+    }
+
+    onServiceChange = () => {
+        this.setState(({swapiService}) => ({
+                swapiService: (swapiService instanceof SwapiService) ? new DummySwapiService() : new SwapiService()
+            })
+        );
     }
 
     render() {
@@ -38,21 +37,17 @@ export default class App extends React.Component {
 
         return (
             <ErrorBoundry>
-                <SwapiServiceProvider value={ this.swapiService }>
+                <SwapiServiceProvider value={ this.state.swapiService }>
                     <div>
-                        <Header />
-                        {/*<RandomPlanet />*/}
-                        {/*<ErrorButton />*/}
-                        {/*<Row left={personDetails}*/}
-                        {/*     right={starshipDetails} />*/}
+                        <Header onServiceChange={this.onServiceChange} />
 
-                        <PersonDetails itemId={11} />
-                        <PlanetDetails itemId={2} />
-                        <StarshipDetails itemId={9} />
+                        <RandomPlanet />
 
-                        <PersonList />
-                        <StarshipList />
-                        <PlanetList />
+                        <PeoplePage />
+
+                        <PlanetPage />
+
+                        <StarshipPage />
                     </div>
                 </SwapiServiceProvider>
             </ErrorBoundry>

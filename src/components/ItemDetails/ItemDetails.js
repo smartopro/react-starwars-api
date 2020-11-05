@@ -1,8 +1,8 @@
 import React from "react";
 import "./ItemDetails.scss";
-import SwapiService from "../../services/SwapiService";
 import Spinner from "../Spinner";
 import ErrorButton from "../ErrorButton";
+import ErrorBoundry from "../ErrorBoundry";
 
 export default class ItemDetails extends React.Component {
     state = {
@@ -11,13 +11,18 @@ export default class ItemDetails extends React.Component {
         image: null
     }
 
-    swapiService = new SwapiService();
-
     componentDidMount() {
         this.updateItem();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.getData !== prevProps.getData ||
+            this.props.getImageUrl !== prevProps.getImageUrl) {
+            this.setState({
+                item: null
+            });
+        }
+
         if(this.props.itemId !== prevProps.itemId) this.updateItem();
     }
 
@@ -30,11 +35,15 @@ export default class ItemDetails extends React.Component {
         });
 
         getData(itemId)
-            .then(item => { this.setState({
-                item,
-                image: getImageUrl(item),
-                loading: false
-            }) })
+            .then(item => {
+                const state = {
+                    item,
+                    image: getImageUrl(item),
+                    loading: false
+                }
+
+                this.setState(state);
+            })
     }
 
     render() {
@@ -48,9 +57,11 @@ export default class ItemDetails extends React.Component {
 
         return (
             <div className="person-details card">
+                <ErrorBoundry>
                 <img className="person-image"
                      src={ image }
                      alt="item" />
+                </ErrorBoundry>
 
                 <div className="card-body">
                     <h4>{name}</h4>

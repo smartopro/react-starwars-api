@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Row = ({left, right}) => {
     return (
@@ -11,6 +12,18 @@ const Row = ({left, right}) => {
             </div>
         </div>
     )
+}
+
+Row.propTypes = {
+    Left: PropTypes.element,
+    Right: PropTypes.node
+}
+
+Row.propTypes = {
+    user: PropTypes.shape({
+        name: PropTypes.string,
+        role: PropTypes.oneOf(["user", "admin"])
+    })
 }
 
 export default Row;
