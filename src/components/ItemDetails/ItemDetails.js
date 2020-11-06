@@ -3,12 +3,14 @@ import "./ItemDetails.scss";
 import Spinner from "../Spinner";
 import ErrorButton from "../ErrorButton";
 import ErrorBoundry from "../ErrorBoundry";
+import ErrorIndicator from "../ErrorIndicator";
 
 export default class ItemDetails extends React.Component {
     state = {
         itemId: null,
         loading: false,
-        image: null
+        image: null,
+        error: null
     }
 
     componentDidMount() {
@@ -18,9 +20,7 @@ export default class ItemDetails extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.getData !== prevProps.getData ||
             this.props.getImageUrl !== prevProps.getImageUrl) {
-            this.setState({
-                item: null
-            });
+            this.updateItem();
         }
 
         if(this.props.itemId !== prevProps.itemId) this.updateItem();
@@ -32,27 +32,38 @@ export default class ItemDetails extends React.Component {
 
         this.setState({
             loading: true,
+            error: false
         });
 
         getData(itemId)
             .then(item => {
-                const state = {
+                this.setState({
                     item,
                     image: getImageUrl(item),
-                    loading: false
-                }
-
-                this.setState(state);
+                    loading: false,
+                    error: false
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    loading: false,
+                    error: true
+                })
             })
     }
 
     render() {
-        if (!this.state.item && !this.state.loading) {
-            return <span className="person-details">Select person from list</span>;
-        }
-        if (this.state.loading) return <Spinner />;
+        const { item, image, loading, error } = this.state;
 
-        const { item, image } = this.state;
+        if(error) {
+            return <ErrorIndicator />
+        }
+
+        if (!item && !loading) {
+            return <span className="person-details">Select item from list</span>;
+        }
+        if (loading) return <Spinner />;
+
         const {name} = item;
 
         return (
