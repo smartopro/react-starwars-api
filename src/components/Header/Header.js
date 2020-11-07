@@ -1,27 +1,31 @@
 import React from "react";
+import {Link} from "react-router-dom";
+
 import "./Header.scss";
 
 const Header = ({onServiceChange}) => {
     return (
         <div className="header d-flex">
             <h3>
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a href="#">
+                <Link to="/">
                     Star DB
-                </a>
+                </Link>
             </h3>
             <ul className="d-flex">
                 <li>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#">People</a>
+                    <Link to="/people/">People</Link>
                 </li>
                 <li>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#">Planets</a>
+                    <Link to="/planets/">Planets</Link>
                 </li>
                 <li>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#">Starships</a>
+                    <Link to="/starships/">Starships</Link>
+                </li>
+                <li>
+                    <Link to="/login">Login</Link>
+                </li>
+                <li>
+                    <Link to="/secret">Secret</Link>
                 </li>
             </ul>
             <button className="btn btn-primary btn-sm" onClick={onServiceChange}>

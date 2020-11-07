@@ -46,6 +46,17 @@ export default class DummySwapiService {
       crew: 1000,
       passengers: 50,
       cargoCapacity: 100
+    },
+    {
+      id: 2,
+      name: 'USS Enterprise 2 [TEST DATA]',
+      model: 'NCC-1702-C',
+      manufacturer: 'Northrop Grumman Shipbuilding',
+      costInCredits: 'not known',
+      length: 'approx 400 meters',
+      crew: 2000,
+      passengers: 150,
+      cargoCapacity: 200
     }
   ];
 
@@ -69,8 +80,8 @@ export default class DummySwapiService {
     return this._starships;
   };
 
-  getStarship = async () => {
-    return this._starships[0];
+  getStarship = async id => {
+    return this._starships.find(item => item.id.toString() === id.toString());
   };
 
   getMaxPeopleId = async () => {

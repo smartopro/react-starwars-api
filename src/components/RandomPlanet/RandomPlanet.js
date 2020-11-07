@@ -11,7 +11,7 @@ import {withSwapiService} from "../HOCHelphers";
 
 class RandomPlanet extends React.Component {
     static defaultProps = {
-        updateInterval: 10 * 1000
+        updateInterval: 600 * 1000
     }
 
     static propTypes = {
